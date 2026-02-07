@@ -4,10 +4,11 @@ import HeroSection from '@/components/HeroSection';
 import DocumentSelector from '@/components/DocumentSelector';
 import FeaturesSection from '@/components/FeaturesSection';
 import ClaimForm from '@/components/ClaimForm';
+import FileUpload from '@/components/FileUpload';
 import ResultsPanel from '@/components/ResultsPanel';
 import { SAMPLE_FNOL_DATA, processClaim, ExtractedFields, ClaimOutput } from '@/lib/claimsProcessor';
 
-type AppView = 'home' | 'form' | 'results';
+type AppView = 'home' | 'form' | 'upload' | 'results';
 
 const Index = () => {
   const [view, setView] = useState<AppView>('home');
@@ -26,7 +27,7 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleCustomSubmit = (fields: ExtractedFields) => {
+  const handleFieldsProcessed = (fields: ExtractedFields) => {
     const output = processClaim(fields);
     setResult(output);
     setView('results');
@@ -54,7 +55,14 @@ const Index = () => {
             <div ref={processorRef}>
               <DocumentSelector
                 onSelect={handleSelectSample}
-                onUploadClick={() => setView('form')}
+                onUploadClick={() => {
+                  setView('upload');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                onManualClick={() => {
+                  setView('form');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
               />
             </div>
             <div id="features">
@@ -63,9 +71,16 @@ const Index = () => {
           </>
         )}
 
+        {view === 'upload' && (
+          <FileUpload
+            onFieldsExtracted={handleFieldsProcessed}
+            onBack={handleBack}
+          />
+        )}
+
         {view === 'form' && (
           <ClaimForm
-            onSubmit={handleCustomSubmit}
+            onSubmit={handleFieldsProcessed}
             onBack={handleBack}
           />
         )}

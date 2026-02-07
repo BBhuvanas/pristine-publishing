@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
-import { FileText, Upload, ChevronRight } from 'lucide-react';
+import { FileText, Upload, ChevronRight, PenLine } from 'lucide-react';
 import { SAMPLE_FNOL_DATA } from '@/lib/claimsProcessor';
 
 interface DocumentSelectorProps {
   onSelect: (docKey: string) => void;
   onUploadClick: () => void;
+  onManualClick: () => void;
 }
 
 const DOC_LABELS: Record<string, { title: string; description: string; tag: string }> = {
@@ -37,7 +38,7 @@ const TAG_STYLES: Record<string, string> = {
   'Manual Review': 'bg-warning/10 text-warning',
 };
 
-const DocumentSelector = ({ onSelect, onUploadClick }: DocumentSelectorProps) => {
+const DocumentSelector = ({ onSelect, onUploadClick, onManualClick }: DocumentSelectorProps) => {
   return (
     <section id="processor" className="py-20 px-6">
       <div className="container mx-auto max-w-4xl">
@@ -51,7 +52,7 @@ const DocumentSelector = ({ onSelect, onUploadClick }: DocumentSelectorProps) =>
             Select an FNOL Document
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Choose a sample First Notice of Loss document to process, or upload your own.
+            Choose a sample document, upload your own PDF/TXT, or enter claim data manually.
           </p>
         </motion.div>
 
@@ -85,21 +86,40 @@ const DocumentSelector = ({ onSelect, onUploadClick }: DocumentSelectorProps) =>
             );
           })}
 
-          {/* Upload option */}
+          {/* Upload PDF/TXT */}
           <motion.button
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
             onClick={onUploadClick}
-            className="group flex items-center gap-4 p-5 bg-card rounded-xl border-2 border-dashed border-border hover:border-primary/40 transition-all text-left w-full"
+            className="group flex items-center gap-4 p-5 bg-card rounded-xl border-2 border-dashed border-primary/30 hover:border-primary/50 hover:bg-primary/[0.02] transition-all text-left w-full"
           >
-            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-muted flex items-center justify-center">
-              <Upload className="w-6 h-6 text-muted-foreground" />
+            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <Upload className="w-6 h-6 text-primary" />
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-card-foreground">Upload Custom FNOL</h3>
-              <p className="text-sm text-muted-foreground">Enter your own claim data manually</p>
+              <h3 className="font-semibold text-card-foreground">Upload FNOL Document</h3>
+              <p className="text-sm text-muted-foreground">Upload a PDF or TXT file for automatic field extraction</p>
+            </div>
+            <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0" />
+          </motion.button>
+
+          {/* Manual entry */}
+          <motion.button
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            onClick={onManualClick}
+            className="group flex items-center gap-4 p-5 bg-card rounded-xl border border-border hover:border-primary/30 transition-all text-left w-full"
+          >
+            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-muted flex items-center justify-center">
+              <PenLine className="w-6 h-6 text-muted-foreground" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-semibold text-card-foreground">Enter Manually</h3>
+              <p className="text-sm text-muted-foreground">Fill in claim fields by hand</p>
             </div>
             <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0" />
           </motion.button>
