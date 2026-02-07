@@ -1,28 +1,80 @@
-# Welcome to your Lovable project
+# 🏦 Autonomous Insurance Claims Processing Agent
 
-## Project info
+## 📌 Project Overview
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+This project implements a **lightweight Autonomous Insurance Claims Processing Agent** that processes FNOL (First Notice of Loss) documents and automatically routes insurance claims based on predefined business rules.
 
-## How can I edit this code?
+The system is designed to:
 
-There are several ways of editing your application.
+* Extract key information from FNOL documents (PDF/TXT)
+* Detect missing or inconsistent data
+* Classify claims into appropriate workflows
+* Provide a clear explanation for each routing decision
 
-**Use Lovable**
+This solution is **rule-based, modular, and easy to extend**, making it suitable for real-world insurance automation scenarios.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🎯 Problem Statement
 
-**Use your preferred IDE**
+Build an agent that can:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+* Extract required claim-related fields from FNOL documents
+* Identify missing mandatory fields
+* Classify and route claims using business rules
+* Output results in a structured JSON format
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 📂 Supported Input Formats
 
-```sh
+* 📄 PDF files (`.pdf`)
+* 📝 Text files (`.txt`)
+
+The agent supports **batch processing** of **3–5 FNOL documents**, as required by the assignment.
+
+---
+
+## 📑 Extracted Fields
+
+### Policy Information
+
+* Policy Number
+* Policyholder Name
+* Effective Dates
+
+### Incident Information
+
+* Incident Date
+* Incident Time
+* Incident Location
+* Incident Description
+
+### Claim Information
+
+* Claim Type
+* Estimated Damage
+* Initial Estimate
+
+---
+
+## ✅ Mandatory Field Validation
+
+The agent checks for missing mandatory fields and flags the claim for **Manual Review** if any required information is absent.
+
+---
+
+## 🔁 Claim Routing Rules
+
+| Condition                                              | Routing Decision    |
+| ------------------------------------------------------ | ------------------- |
+| Estimated damage < ₹25,000                             | Fast-track          |
+| Any mandatory field missing                            | Manual Review       |
+| Description contains “fraud”, “inconsistent”, “staged” | Investigation Flag  |
+| Claim type = Injury                                    | Specialist Queue    |
+| None of the above                                      | Standard Processing |
+
+---
 # Step 1: Clone the repository using the project's Git URL.
 git clone <YOUR_GIT_URL>
 
@@ -71,3 +123,34 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+## 🚀 Future Enhancements
+
+* NLP-based negation handling (e.g., “no fraud”)
+* Machine learning-based claim classification
+* REST API interface
+* Database integration for claim storage
+* UI dashboard for claim review
+
+---
+
+## 👨‍💻 Author
+
+BBHUVANA SRI
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
