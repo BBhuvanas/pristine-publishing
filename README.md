@@ -1,5 +1,5 @@
 # 🏦 Autonomous Insurance Claims Processing Agent
- **URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+
 ## 📌 Project Overview
 
 This project implements a **lightweight Autonomous Insurance Claims Processing Agent** that processes FNOL (First Notice of Loss) documents and automatically routes insurance claims based on predefined business rules.
@@ -133,7 +133,7 @@ Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/c
 * UI dashboard for claim review
 
 ---
-
+ **URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 ## 👨‍💻 Author
 
 BBHUVANA SRI
